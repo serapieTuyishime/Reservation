@@ -1,0 +1,171 @@
+html {
+	height: 100%;
+}
+body{
+	/*background: url("volcanos.jpg");*/
+	/*background-repeat: no-repeat;*/
+	height: 100%;
+	background-size: cover;
+	background-color: #D1FCD7;
+	/*background-color: green;*/
+
+}
+sup
+{
+	color: red;
+}
+h2
+{
+	display: block;
+	text-align: center;
+}
+a
+{
+	text-decoration: none;
+	color: inherit;
+}
+ul
+{
+	list-style-type: none;
+}
+#info
+{
+	display: block;
+	margin-left: 2rem;
+	margin-top: 1rem;
+	font-weight: 600;
+}
+#error_label
+{
+	display: block;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 4rem;
+	font-size: 1.4rem;
+}
+#singleRoom
+{
+	height: 60rem;
+	/*padding-top: 3rem;*/
+}
+#few_details
+{
+	padding: 2rem;
+}
+#feedbacks_div 
+{
+	height: 6rem;
+}
+#bigButton
+{
+	width: 30%;
+	font-size: 28px;
+	margin:auto;
+	display: block;
+}
+#small_words
+{
+	text-align: right;
+	font-size: 19px;
+	font-style: italic;
+}
+#small_words a
+{
+	color: green;
+}
+#navigation
+{
+	display: inline;
+	float: right;
+	height: 20rem;
+	padding-left: unset;
+	padding-right: 3rem;
+
+}
+#navigation ul li
+{
+	padding: 2px;
+	border-bottom: 1px solid white;
+	margin-bottom: 6px;
+	display: block;
+
+}
+.mx-auto
+{
+	float: left;
+	display: inline-block;
+}
+.bg-dark
+{
+	color: white;
+	font-size: 21px;
+	/*font-weight: bold;*/
+}
+.jumbotron
+{
+	margin-top: 6rem;
+	background-color: inherit;
+}
+.card
+{
+	background-color: inherit;
+}
+#subDivHome button
+{
+	width: 20rem;
+	height: 3rem;
+	display: inline;
+	font-family: cursive;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8), 0 6px 20px 0 rgba(0,0,0,0.11);
+	border-radius: 1px;
+	color: black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border: 0.4px solid white;
+	margin: auto;
+}
+#subDivHome button:hover
+{
+	background-color: unset;
+}
+#subDivHome form
+{
+	display: inline;
+}
+#subDivHome form input[type='submit']:hover
+{
+	background-color: unset;
+}
+#subDivHome form input[type='submit']
+{
+	color: #fff;
+	background-color: #28a745;
+	border-color: #28a745;
+	width: 20rem;
+	height: 3rem;
+	display: inline;
+	font-family: cursive;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8), 0 6px 20px 0 rgba(0,0,0,0.11);
+	border-radius: 1px;
+	color: black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border: 0.4px solid white;
+	margin: auto;
+}
+.btn
+{
+	transition-duration: 0.4s;
+}
+#copyright
+{
+	position: fixed;
+	bottom: -2px;
+	color: black;
+	text-align: center;
+	width:100%;
+	z-index: 1;
+	padding: 2px;
+	margin-top: 4rem;
+}
+
