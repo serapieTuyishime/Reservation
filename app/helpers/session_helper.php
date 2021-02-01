@@ -1,6 +1,5 @@
 <?php
    session_start();
-   //$_SESSION['user'] = 'Brad';
 
    //Flash message helper
    //EXAMPLE - flash('register_success', 'You are now registered', 'alert alert-danger');

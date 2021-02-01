@@ -71,12 +71,13 @@
 		public function reserve($data)
 		{
 			$guestId= $this->registerGuest($data);
-			$this->db->query('INSERT into reservation (room, lodge, guestName, price, dateIn, dateOut, clientId) values (:room, (SELECT lodge from rooms where name= :room limit 1), :clientName, :amount, :date_in, :date_out, (SELECT last_insert_id() from guests limit 1))');
+			$this->db->query('INSERT into reservation (room, lodge, guestName, price, dateIn, dateOut, clientId, status) values (:room, (SELECT lodge from rooms where name= :room limit 1), :clientName, :amount, :date_in, :date_out, (SELECT last_insert_id() from guests limit 1), :status)');
 			$this->db->bind(':room', $data['roomName']);
 			$this->db->bind(':clientName', $data['clientName']);
 			$this->db->bind(':amount', $data['amount']);
 			$this->db->bind(':date_in', $data['date_in']);
 			$this->db->bind(':date_out', $data['date_out']);
+			$this->db->bind(':status', "pending");
 
 			if ($this->db->execute()) 
 			{

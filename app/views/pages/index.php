@@ -192,7 +192,7 @@
                       </li>
                       <li>
                         <h4 class="card-info-title">Available</h4>
-                        <span>True</span>
+                        <span>Yes</span>
                       </li>
                       <li>
                         <h4 class="card-info-title">Category</h4>
@@ -256,6 +256,5 @@
 
     <!-- ======= Latest News Section ======= -->
 
-  </main><!-- End #main -->
 
 <?php require_once APPROOT . '/views/inc/footer.php' ?>

@@ -23,6 +23,11 @@ class Rooms extends Controller
 		];
 		$this->view('rooms/register', $data);
 	}
+	public function showAll()
+	{
+		$data= $this->roomModel->fetchAllRooms();
+		$this->view('rooms/show', $data);
+	}
 	public function register()
 	{
 		if ($_SERVER['REQUEST_METHOD']=='POST') 
@@ -115,7 +120,7 @@ class Rooms extends Controller
 		if ($_SERVER['REQUEST_METHOD']=='POST') 
 		{
 			$_POST= filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-			$room= $_POST['room'];
+			$room= isset($_POST['room'])? $_POST['room']:'';
 			$date_in= $_POST['date_in'];
 			$date_out= $_POST['date_out'];
 			$price= $_POST['price'];
@@ -128,6 +133,7 @@ class Rooms extends Controller
 			$district= $_POST['district'];
 			$sector= $_POST['sector'];
 			$gender= $_POST['gender'];
+			$password= $_POST['paymentpassword'];
 
 			$clientName= strtoupper($lName).' '.ucfirst($fName);
 			$location= $country.'-'.$province.'-'.$district.'-'.$sector;
@@ -139,6 +145,16 @@ class Rooms extends Controller
 
             $amount= floatval($price)* intval($diff);
 
+            if (empty($room)) 
+            {
+            	flash('register_success', "A problem arose while reserving please browse again", "alert alert-danger");
+            	echo "<script>window.history.back();</script>";
+            	die();
+            }
+
+            //validate email
+
+            
             $roomDetails= $this->roomModel->fetchRoomByName($room);
             $charge= $amount * RESERVATIONFEE; //get the commission
 
@@ -155,19 +171,55 @@ class Rooms extends Controller
 				'email'=>$email,
 				'location'=>$location,
 				'gender'=>$gender,
-				'date_err'=>''
+				'date_err'=>'',
+				'date1_err'=>'',
+				'email_err'=>''
 			];
+			// validate dates
+
+			if ($date_in < date('Y-m-d')) 
+			{
+				$data['date1_err']= "The date is incorrect";
+			}
+
+			// set a timeline so that you cant reserve a room n time years or months from now
+
+			if ($date_out > date('Y-m-d', strtotime("+".LIMITTIME)) ) 
+			{
+				$data['date_err']= "We do not operate more than a period of ". LIMITTIME;
+			}
+
 			if ($date_in>= $date_out) 
 			{
 				$data['date_err']= "You must at least stay one day with us";
 			}
-			if (empty($data['date_err'])) 
+
+			// validate email
+			if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) 
+            {
+            	$data['email_err']= "Invalid email address";
+            }
+
+			// initiate payment method
+			if (empty($_POST['paymentpassword'])) 
 			{
+				flash('register_success', "The pasword must not be empty", "alert alert-danger");
+                redirect('rooms/reservation');
+
+			}
+
+
+			if (empty($data['date_err'])&&empty($data['date1_err'])&&empty($data['email_err'])) 
+			{
+
 				if($reservation_code= $this->roomModel->reserve($data))
 				{
 					$this->reservationModel->chargeCommission($data);
-					flash('register_success', 'Reservation posted and your reservation code is: '. $reservation_code);
-                    redirect('rooms/reservation');
+
+
+					flash('register_success', 'Reservation posted and your reservation code is: '. $reservation_code. 'But you will need to pay '. $data['charge']. "To activate it");
+					header('location: '. URLROOT. '/reservations/payment/'.$reservation_code);
+					die();
 				}
 				else
 				{

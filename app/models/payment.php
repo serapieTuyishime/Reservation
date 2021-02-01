@@ -1,5 +1,5 @@
 <?php
-   class User {
+   class Payment {
       private $db;
 
       public function __construct(){
@@ -20,18 +20,20 @@
          }
       }
       //Login user
-      public function login($email, $password){
-         $this->db->query('SELECT * FROM users WHERE email = :email');
+      public function fetchClientByEmail($email)
+      {
+         $this->db->query('SELECT * FROM clientcash WHERE clientEmail = :email');
          $this->db->bind(':email', $email);
 
-         $row = $this->db->single();
-
-         $hashed_password = $row->password;
-         if(password_verify($password, $hashed_password)){
-            return $row;
-         }else{
-            return false;
-         }
+         return $this->db->single();         
+      }
+      public function reduceClientCash($data)
+      {
+         $this->db->query('UPDATE clientcash set amount= (amount - :cash) where clientEmail =:email');
+         $this->db->bind(':cash', $data['amount']);
+         $this->db->bind(':email', $data['email']);
+         $this->db->execute();
+         return; 
       }
 
       //Find user by email

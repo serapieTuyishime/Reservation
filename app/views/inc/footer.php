@@ -1,3 +1,4 @@
+</main>
 </div>
 <footer>
     <div class="container">
@@ -36,11 +37,17 @@
       </div>
     </div>
   </footer><!-- End  Footer -->
+  
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/jquery-3.5.1.js"></script>
+
+<!-- script for validating forms onkeypress -->
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/form-validation-script.js"></script>
+
 
 <!-- <script type="text/javascript" src="<?php echo URLROOT; ?>/js/new.js"></script> -->
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/main.js"></script>
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/bootstrap.js"></script>
+<!-- <script type="text/javascript" src="<?php echo URLROOT; ?>/js/bootstrap.js"></script> -->
 <script src="<?php echo URLROOT; ?>/js/jquery/jquery.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/jquery.easing/jquery.easing.min.js"></script>
@@ -53,6 +60,6 @@
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="<?php echo URLROOT; ?>/js/home.js"></script>
+  <script type="text/javascript" src="<?php echo URLROOT; ?>/js/home.js"></script>
 </body>
 </html>

@@ -28,9 +28,17 @@
 			return $this->db->execute();
 	
 		}
+		public function confirmReservation($data)
+		{
+			$this->db->query('UPDATE reservation set status= :status WHERE id=:id');
+			$this->db->bind('status', "confirmed");
+			$this->db->bind('id', $data['reservationId']);
+			$this->db->execute();
+			return; 
+		}
 		public function fetchDetailsByReservationId($id)
 		{
-			$this->db->query('SELECT id, room, dateIn, dateOut, (SELECT dateVisited from guests where id=clientId) as reservationDate from reservation where id=:id');
+			$this->db->query('SELECT *, (SELECT dateVisited from guests where id=clientId) as reservationDate from reservation where id=:id');
 			$this->db->bind('id', $id);
 			$row= $this->db->single();
 			if ($this->db->rowCount()>0) 
