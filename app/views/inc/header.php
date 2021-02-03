@@ -144,6 +144,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/lodges/showAll">Lodges</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/Reservations/changeReservation">Reservations</a>
+          </li>
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Pages
@@ -158,6 +161,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/contact">Contact</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/managers/login">Manager login</a>
+          </li>
         </ul>
       </div>
       <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
@@ -166,3 +172,4 @@
     </div>
   </nav><!-- End Header/Navbar -->
 <main id="main">
+  <br><br><br><br>

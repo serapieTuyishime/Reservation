@@ -124,6 +124,15 @@ ul
 	border: 0.4px solid white;
 	margin: auto;
 }
+form
+{
+	/*background: url("<?php echo URLROOT; ?>/img/slide-2.jpg")*/;
+	font-weight: 800;
+}
+.card form
+{
+	/*background-color: #ECFFFA;*/
+}
 #subDivHome button:hover
 {
 	background-color: unset;

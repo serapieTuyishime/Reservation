@@ -11,7 +11,7 @@
 		}
 		public function index($date='')
 		{
-			if ($_SESSION['user_type']!='admin')
+			if ($_SESSION['user_type']!='manager')
 			{
 				header('location:'.URLROOT);
 				die();
@@ -87,6 +87,24 @@
 					$datee= $details[1];
 					$nextDateIn= date('Y-m-d', strtotime("$datee - 1 day"));
 				}
+
+				// check if the reservation has not expired
+
+				if ($row->date_out < date('Y-m-d')) 
+				{
+					$data=
+					[
+						'reservation_id'=>$reservation_id,
+						'date_in'=>'',
+						'reservation_date'=>'',
+						'date_out'=>'',
+						'l_date_in'=>'',
+						'room'=>'',
+						'code_err'=>'Your reservation was terminated'
+					];
+					$this->view('Reservations/revert', $data);
+					die();
+				}
 				$data=
 				[
 					'reservation_id'=>$row->id,
@@ -104,7 +122,7 @@
 			{
 				$data=
 				[
-					'reservation_id'=>'',
+					'reservation_id'=>$reservation_id,
 					'date_in'=>'',
 					'reservation_date'=>'',
 					'date_out'=>'',
@@ -253,6 +271,11 @@
 	            				flash('register_success', "Your reservation has been confirmed you will have to use the reservation code: ". $data['reservationId']. " When needed");
 	            				die("done registering go to show all rooms or the room cart when set");
 	            				// redurect('lodges/showAll');
+	            			}
+	            			else
+	            			{
+	            				flash('register_success', "Your balance is not enough to complete the payment", 'alert alert-warning');
+	            				$this->view('reservations/payment', $data);
 	            			}
 	            		}
 	            		else

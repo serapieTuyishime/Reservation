@@ -6,7 +6,7 @@
         <div class="card card-body bg-light mt-5">
         	<?php flash('register_success'); ?>
         	<h2>All reservations</h2>
-        	<table class="table table-striped">
+        	<table class="table table-striped" id="datatablee">
         		<tr>
         			<thead class="thead-dark">
         				<th>ID</th>

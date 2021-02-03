@@ -1,10 +1,11 @@
 <?php include_once APPROOT . '/views/inc/header.php' ?>
+<br><br><br><br>
 <div class="row">
 	<div class="mx-auto">
-    <label class="btn btn-light" onclick="goBack()"><i class="fa fa-backward"></i>Back</label>
+    <!-- <label class="btn btn-light" onclick="goBack()"><i class="fa fa-backward"></i>Back</label> -->
         <div class="card card-body bg-light mt-5">
         	<?php flash('register_success'); ?>
-        	<h2>All managers</h2>
+        	<h2>All feedbacks</h2>
         	<table class="table table-striped">
         		<tr>
         			<thead class="thead-dark">

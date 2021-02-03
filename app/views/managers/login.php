@@ -1,4 +1,5 @@
 <?php include_once APPROOT . '/views/inc/header.php' ?>
+<br><br><br>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card card-body bg-light mt-5">
