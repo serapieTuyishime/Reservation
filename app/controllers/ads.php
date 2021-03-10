@@ -77,5 +77,10 @@
 				$this->index();
 			}
 		}
+		public function show()
+		{
+			$data= $this->adModel->showAll();
+			$this->view('advertisement/show', $data);
+		}
 	}
 ?>

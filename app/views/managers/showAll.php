@@ -1,10 +1,12 @@
 <?php include_once APPROOT . '/views/inc/header.php' ?>
 <div class="row">
-	<div class="mx-auto">
+	<div class="mx-auto ml-1 col-md-9">
     <label class="btn btn-success" onclick="goBack()"><i class="fa fa-backward"></i> Back</label>
         <div class="card card-body bg-light mt-5">
         	<?php flash('register_success'); ?>
         	<h2>All managers</h2>
+            <div class="text-right"><a href="<?php echo URLROOT; ?>/managers/register" class="btn btn-primary"><i class="fa fa-plus"></i> Add new</a></div>
+
         	<table class="table table-striped" id="datatablee">
         		
         		<thead class="thead-dark">

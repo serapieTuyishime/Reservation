@@ -1,4 +1,4 @@
-<?php 
+<?php
 	class Room
 	{
 		private $db;
@@ -17,7 +17,7 @@
 			$this->db->bind('comments',$data['comments']);
 			$this->db->bind('imageName',$data['imageName']);
 
-			if ($this->db->execute()) 
+			if ($this->db->execute())
 			{
 				return true;
 			}
@@ -26,12 +26,12 @@
 				return false;
 			}
 		}
-		public function fetchRoomByName($name) 
+		public function fetchRoomByName($name)
 		{
 			$this->db->query('SELECT * from rooms where name=:name');
 			$this->db->bind('name', $name);
 			$row= $this->db->single();
-			if ($this->db->rowCount()>0) 
+			if ($this->db->rowCount()>0)
 			{
 				return $row;
 			}
@@ -40,12 +40,12 @@
 				return false;
 			}
 		}
-		public function fetchRoomDetailsByName($name) 
+		public function fetchRoomDetailsByName($name)
 		{
 			$this->db->query('SELECT *, (SELECT count(*) from reservation where room= :name and closed="true") as reservations, (SELECT feedback from reservation where room=:name order by dateOut desc limit 1) as pastComments, (SELECT dateOut from reservation where room=:name order by dateOut desc limit 1) as dateOut  from rooms where name=:name');
 			$this->db->bind('name', $name);
 			$row= $this->db->single();
-			if ($this->db->rowCount()>0) 
+			if ($this->db->rowCount()>0)
 			{
 				return $row;
 			}
@@ -59,7 +59,7 @@
 			$this->db->query('SELECT *,(SELECT dateOut from reservation where room=:name order by dateOut desc limit 1) as dateOut from rooms where name=:name');
 			$this->db->bind(':name', $name);
 			$row= $this->db->single();
-			if ($this->db->rowCount()>0) 
+			if ($this->db->rowCount()>0)
 			{
 				return $row;
 			}
@@ -79,7 +79,7 @@
 			$this->db->bind(':date_out', $data['date_out']);
 			$this->db->bind(':status', "pending");
 
-			if ($this->db->execute()) 
+			if ($this->db->execute())
 			{
 				$reservation_id= $this->fetchReservationNumber();
 				return $reservation_id;
@@ -104,7 +104,7 @@
 			$this->db->bind('location', $data['location']);
 			$this->db->bind('dateVisited', date('Y-m-d'));
 
-			if ($this->db->execute()) 
+			if ($this->db->execute())
 			{
 				return true;
 			}
@@ -112,6 +112,12 @@
 			{
 				return false;
 			}
+		}
+		public function fetchAllRooms()
+		{
+			$this->db->query('SELECT * from rooms where rooms.lodge= (SELECT managers.lodge from managers where email=:email limit 1  )');
+			$this->db->bind('email', $_SESSION['user_email']);
+			return $this->db->resultSet();
 		}
 	}
 ?>

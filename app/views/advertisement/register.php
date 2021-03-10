@@ -31,7 +31,7 @@ $tomorrow= date('Y-m-d', strtotime('+1 day'));
                 </div>
                 <div class="form-group">
                     <label for="imagefile">Image: <sup>*</sup> </label>
-                    <input type="file" required name="imagefile" class="form-control form-control-lg <?php echo (empty($data['image_err'])) ? '':'is-invalid'; ?>"
+                    <input type="file" required name="imagefile" class=" <?php echo (empty($data['image_err'])) ? '':'is-invalid'; ?>"
                         value="<?php echo $data['imageName']; ?>">
                     <span class="invalid-feedback"><?php echo $data['image_err']; ?></span>
                 </div>

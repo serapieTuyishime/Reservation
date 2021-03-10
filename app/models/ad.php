@@ -25,5 +25,10 @@
 				return false;
 			}
 		}
+		public function showAll()
+		{
+			$this->db->query('SELECT * FROM advertisements');
+			return $this->db->resultSet();
+		}
 	}
  ?>

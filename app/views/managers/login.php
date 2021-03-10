@@ -2,11 +2,11 @@
 <br><br><br>
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <div class="card card-body bg-light mt-5">
+        <div class="card card-body bg-white mt-5">
             <?php flash('register_success'); ?>
-             <h2>Manager login </h2> <span class="text-muted" id="small_words">Or as an <a href="<?php echo URLROOT; ?>/admins/login">admin</a></span>
+             <h2>Manager login </h2> <span class="text-muted" id="small_words">Or as an <a href="<?php echo URLROOT; ?>/users/adminLogin">admin</a></span>
             <p>Please fill in your credentials to log in</p>
-            <form action="<?php echo URLROOT; ?>/managers/login" method="post">
+            <form action="<?php echo URLROOT; ?>/users/managerlogin" method="post">
                 <div class="form-group">
                     <label for="email">Email: <sup>*</sup></label>
                     <input type="email" name="email" class="form-control form-control-lg <?php echo (empty($data['email_err'])) ? '':'is-invalid'; ?>"
@@ -22,10 +22,10 @@
 
                 <div class="row">
                     <div class="col">
-                        <input type="submit" value="Login" class="btn btn-success btn-block">
+                        <input type="submit" value="Login" class="btn btn-success btn-block form-control">
                     </div>
                     <div class="col">
-                        <a href="<?php echo URLROOT; ?>/managers/register" class="btn btn-light btn-block">No account? Register</a>
+                        <a href="<?php echo URLROOT; ?>/users/managerForgotPassword" class="btn btn-light btn-block">Forgot password? </a>
                     </div>
                 </div>
             </form>

@@ -22,7 +22,8 @@
         {
             if ($_SESSION['user_type']!='admin') 
             {
-                redirect('admins/login');
+                flash('register_success','Login as an admin to continue');
+                redirect('users/adminLogin');
                 die();
             }
             if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -145,95 +146,6 @@
                 flash('register_success', 'Failed deleting a manager');
                 redirect('managers/showAll');
             }
-        }
-
-        public function login()
-        {
-            if($_SERVER['REQUEST_METHOD'] == 'POST')
-            {
-
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $email= isset($_POST['email'])? $_POST['email']:'';
-
-                $data = 
-                [
-                    'email' => trim($email),
-                    'password' => trim($_POST['password']),
-                    'email_err' => '',
-                    'password_err' => '',
-                ];
-
-                if(empty($data['email']))
-                {
-                    $data['email_err'] = 'Please enter email';
-                }
-
-                //Validate Password
-                if(empty($data['password']))
-                {
-                    $data['password_err'] = 'Please enter password';
-                }
-                elseif(strlen($data['password']) < 6)
-                {
-                    $data['password_err'] = 'Password must be at least 6 characters';
-                }
-
-                //Check for user/email
-                if($email= $this->userModel->findManagerByEmail($data['email']))
-                {
-                    //Validated
-                }
-                else
-                {
-                    $data['email_err'] = 'No user found';
-                }
-
-                //Make sure errors are empty
-                if(empty($data['email_err']) && empty($data['password_err']))
-                {
-
-                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-                    if($loggedInUser){
-                        //Create Session
-                        $this->createUserSession($loggedInUser);
-                    }else{
-                        $data['password_err'] = 'Password incorrect';
-                        $this->view('managers/login', $data);
-                    }
-                } else {
-                    //Load view with errors
-                    $this->view('managers/login', $data);
-                }
-            }
-            else
-            {
-                $data = [
-                    'email' => '',
-                    'password' => '',
-                    'email_err' => '',
-                    'password_err' => '',
-                ];
-                $this->view('managers/login', $data);
-            }
-        }
-        
-        public function logout(){
-            unset($_SESSION['user_id']);
-            unset($_SESSION['user_email']);
-            unset($_SESSION['user_type']);
-            unset($_SESSION['user_name']);
-            session_destroy();
-            redirect('managers/login');
-        }
-
-        public function createUserSession($user){
-            $_SESSION['user_id'] = $user->id;
-            $_SESSION['user_type']='manager';
-            $_SESSION['user_email'] = $user->email;
-            $_SESSION['user_name'] = $user->name;
-            redirect('rooms');
-        }
-
-       
+        }       
     }
 ?>

@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Image: <sup>*</sup></label>
-                    <input type="file" name="imagefile" class="form-control form-control-lg <?php echo (empty($data['image_err'])) ? '':'is-invalid'; ?>"
+                    <input type="file" name="imagefile" class=" <?php echo (empty($data['image_err'])) ? '':'is-invalid'; ?>"
                         value="<?php echo $data['imagefile']; ?>">
                     <span class="invalid-feedback"><?php echo $data['image_err']; ?></span>
                 </div>

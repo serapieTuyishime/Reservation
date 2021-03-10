@@ -15,7 +15,7 @@
             $this->db->bind('lodge', $data['lodge']);
             $this->db->bind('password', $data['password']);
 
-            if ($this->db->execute()) 
+            if ($this->db->execute())
             {
                 return true;
             }
@@ -55,6 +55,20 @@
                 return false;
             }
         }
+        public function fetchManagerByTelephone($telephone)
+        {
+            $this->db->query('SELECT * FROM managers where telephone= :telephone');
+            $this->db->bind(':telephone', $telephone);
+            $row= $this->db->single();
+            if($this->db->rowCount()>0)
+            {
+                return $row;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public function getManagerById($id)
         {
             $this->db->query('SELECT * from managers where id= :id');
@@ -66,7 +80,7 @@
         {
             $this->db->query('SELECT * from managers');
             $row= $this->db->resultSet();
-            if ($this->db->rowCount()>0) 
+            if ($this->db->rowCount()>0)
             {
                return $row;
             }
@@ -82,4 +96,11 @@
             return $this->db->execute();
 
         }
+        public function changePassword($password, $telephone)
+		{
+			$this->db->query('UPDATE managers set password= :password where telephone= :telephone');
+			$this->db->bind('password', $password);
+			$this->db->bind('telephone', $telephone);
+			return $this->db->execute();
+		}
     }

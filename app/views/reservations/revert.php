@@ -72,7 +72,10 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="submit" value="Finish" class="btn btn-success btn-block">
+                        <input type="submit" name="action" value="Finish" class="btn btn-success btn-block">
+                    </div>
+                    <div class="col">
+                        <input type="submit" name="action" value="Delete" class="btn btn-danger btn-block">
                     </div>
                     <div class="col">
                         <label class="btn btn-light btn-block" onclick="goBack()">Back</label>

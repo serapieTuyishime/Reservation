@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 class Rooms extends Controller
 {
-	
+
 	public function __construct()
 	{
 		$this->roomModel= $this->model('room');
@@ -30,7 +30,7 @@ class Rooms extends Controller
 	}
 	public function register()
 	{
-		if ($_SERVER['REQUEST_METHOD']=='POST') 
+		if ($_SERVER['REQUEST_METHOD']=='POST')
 		{
 			$_POST= filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 			$name= trim($_POST['name']);
@@ -44,8 +44,8 @@ class Rooms extends Controller
 			$target_file= $target_dir. basename($_FILES['imagefile']['name']);
 			$imagefiletype= strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 			$extensions_list=	array("jpg","png","gif");
-			
-			$image_base64= base64_encode(file_get_contents($_FILES['imagefile']['tmp_name'])); 
+
+			$image_base64= base64_encode(file_get_contents($_FILES['imagefile']['tmp_name']));
 			$image='data:image/'.$imagefiletype.';base64,'.$image_base64;
 
 			$data=
@@ -59,23 +59,23 @@ class Rooms extends Controller
 				'name_err'=>'',
 				'image_err'=>''
 			];
-			if ($_SESSION['user_type']!='manager') 
+			if ($_SESSION['user_type']!='manager')
 			{
 				flash('register_success', 'Please login as a manager');
                 redirect('managers/login');
                 die();
 			}
-			if (!in_array($imagefiletype, $extensions_list)) 
+			if (!in_array($imagefiletype, $extensions_list))
 			{
 				$data['image_err']= 'Please input the correct file extension between "jpg","png" and "gif"';
 			}
-			if ($this->roomModel->fetchRoomByName($name)) 
+			if ($this->roomModel->fetchRoomByName($name))
 			{
 				$data['name_err']= 'Room name taken';
 			}
-			if (empty($data['name_err'])&&empty($data['image_err'])) 
+			if (empty($data['name_err'])&&empty($data['image_err']))
 			{
-				if ($this->roomModel->register($data)) 
+				if ($this->roomModel->register($data))
 				{
 					flash('register_success', 'Done registering rooms');
                     redirect('rooms');
@@ -117,7 +117,7 @@ class Rooms extends Controller
 	}
 	public function reservation()
 	{
-		if ($_SERVER['REQUEST_METHOD']=='POST') 
+		if ($_SERVER['REQUEST_METHOD']=='POST')
 		{
 			$_POST= filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 			$room= isset($_POST['room'])? $_POST['room']:'';
@@ -139,24 +139,24 @@ class Rooms extends Controller
 			$location= $country.'-'.$province.'-'.$district.'-'.$sector;
 
 			$date1=new DateTime($date_in);
-            $date2=new DateTime($date_out);
-            $interval= $date1->diff($date2);
-            $diff= $interval->format('%a');
+			$date2=new DateTime($date_out);
+			$interval= $date1->diff($date2);
+			$diff= $interval->format('%a');
 
-            $amount= floatval($price)* intval($diff);
+			$amount= floatval($price)* intval($diff);
 
-            if (empty($room)) 
-            {
-            	flash('register_success', "A problem arose while reserving please browse again", "alert alert-danger");
-            	echo "<script>window.history.back();</script>";
-            	die();
-            }
+			if (empty($room))
+			{
+				flash('register_success', "A problem arose while reserving please browse again", "alert alert-danger");
+				echo "<script>window.history.back();</script>";
+				die();
+			}
 
-            //validate email
+			//validate email
 
-            
-            $roomDetails= $this->roomModel->fetchRoomByName($room);
-            $charge= $amount * RESERVATIONFEE; //get the commission
+
+			$roomDetails= $this->roomModel->fetchRoomByName($room);
+			$charge= $amount * RESERVATIONFEE; //get the commission
 
 			$data=
 			[
@@ -177,39 +177,39 @@ class Rooms extends Controller
 			];
 			// validate dates
 
-			if ($date_in < date('Y-m-d')) 
+			if ($date_in < date('Y-m-d'))
 			{
 				$data['date1_err']= "The date is incorrect";
 			}
 
 			// set a timeline so that you cant reserve a room n time years or months from now
 
-			if ($date_out > date('Y-m-d', strtotime("+".LIMITTIME)) ) 
+			if ($date_out > date('Y-m-d', strtotime("+".LIMITTIME)) )
 			{
 				$data['date_err']= "We do not operate more than a period of ". LIMITTIME;
 			}
 
-			if ($date_in>= $date_out) 
+			if ($date_in>= $date_out)
 			{
 				$data['date_err']= "You must at least stay one day with us";
 			}
 
 			// validate email
-			if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) 
-            {
-            	$data['email_err']= "Invalid email address";
-            }
+			if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email))
+			{
+				$data['email_err']= "Invalid email address";
+			}
 
 			// initiate payment method
-			if (empty($_POST['paymentpassword'])) 
+			if (empty($_POST['paymentpassword']))
 			{
 				flash('register_success', "The pasword must not be empty", "alert alert-danger");
-                redirect('rooms/reservation');
+				redirect('rooms/reservation');
 
 			}
 
 
-			if (empty($data['date_err'])&&empty($data['date1_err'])&&empty($data['email_err'])) 
+			if (empty($data['date_err'])&&empty($data['date1_err'])&&empty($data['email_err']))
 			{
 
 				if($reservation_code= $this->roomModel->reserve($data))
@@ -224,7 +224,7 @@ class Rooms extends Controller
 				else
 				{
 					flash('register_success', 'Something is wrong');
-                    redirect('rooms/reservation');
+					redirect('rooms/reservation');
 				}
 
 			}
@@ -246,6 +246,8 @@ class Rooms extends Controller
 			$this->view('rooms/reservation', $data);
 		}
 	}
+
+
 }
 
 ?>

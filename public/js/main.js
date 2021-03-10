@@ -27,7 +27,7 @@ function validate_alphabets(e)
 		{
 			return true;
 		}
-		else 
+		else
 		{
 			return false;
 		}
@@ -71,7 +71,7 @@ function increment_time()
     var newdate = new Date(date);
 
     newdate.setDate(newdate.getDate() + days_to_add);
-    
+
     var dd = newdate.getDate();
     if (dd<=9){
     	dd='0'+dd;
@@ -85,7 +85,7 @@ function increment_time()
     var FormattedDate = y + '-' + mm + '-' + dd;
     // var someFormattedDate=y+"-"mm+"-"+dd;
     document.getElementById('end_booking').value = FormattedDate;
-} 
+}
 function validate_alphabets_with_symbols(e)
 {
 	try
@@ -122,7 +122,7 @@ function validate()
 	}
 	else
 		return true;
-	
+
 }
 function showFunction()
 {
@@ -152,4 +152,14 @@ function theClick(promptText= 'Enter reservation code')
 
 $(document).ready(function() {
     $('#datatablee').DataTable();
+} );
+
+$(document).ready(function() {
+    $('#dataTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons:
+        [
+            'print'
+        ]
+    } );
 } );

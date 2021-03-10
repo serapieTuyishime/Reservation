@@ -125,5 +125,17 @@
 				return false;
 			}
 		}
+		public function searchByLocation($data)
+		{
+			$this->db->query('SELECT *, (select count(*) from rooms where lodge=lodgeName) as rooms from lodges where country=:country and province=:province and district=:district and sector=:sector and cell=:cell');
+			$this->db->bind('country', $data['country']);
+			$this->db->bind('province', $data['province']);
+			$this->db->bind('district', $data['district']);
+			$this->db->bind('sector', $data['sector']);
+			$this->db->bind('cell', $data['cell']);
+
+			return  $this->db->resultSet();
+
+		}
 	}
 ?>

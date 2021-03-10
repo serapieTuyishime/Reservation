@@ -9,40 +9,11 @@
 			$this->reservationModel= $this->model('reservation');
 			$this->paymentModel= $this->model('payment');
 		}
-		public function index($date='')
+		public function index()
 		{
-			if ($_SESSION['user_type']!='manager')
-			{
-				header('location:'.URLROOT);
-				die();
-			}
-			$r_date= empty($date)? date('Y-m-d'): $date;
-			$data= $this->reservationModel->fetchAllReservations($r_date);
-			$this->view('reservations/show', $data);
+			redirect('pages');
 		}
-		public function findReservationsBydate()
-		{
-			if ($_SERVER['REQUEST_METHOD']=='POST')
-			{
-				$date= $_POST['dateFrom'];
-				$this->index($date);
-			}
-			else
-			{
-				$this->index();
 
-			}
-		}
-		public function fetchReservationByLodge($lodge='body')
-		{
-			if (!isset($_SESSION['user_email']))
-			{
-				header('location:'. URLROOT);
-				die();
-			}
-			$data= $this->reservationModel->fetchReservationByLodge();
-			$this->view('reservations/show', $data);
-		}
 		public function changeReservation()
 		{
 			$data=
@@ -90,7 +61,7 @@
 
 				// check if the reservation has not expired
 
-				if ($row->date_out < date('Y-m-d')) 
+				if ($row->dateOut < date('Y-m-d'))
 				{
 					$data=
 					[
@@ -101,6 +72,21 @@
 						'l_date_in'=>'',
 						'room'=>'',
 						'code_err'=>'Your reservation was terminated'
+					];
+					$this->view('Reservations/revert', $data);
+					die();
+				}
+				elseif($row->closed)
+				{
+					$data=
+					[
+						'reservation_id'=>$reservation_id,
+						'date_in'=>'',
+						'reservation_date'=>'',
+						'date_out'=>'',
+						'l_date_in'=>'',
+						'room'=>'',
+						'code_err'=>'Your reservation was deleted'
 					];
 					$this->view('Reservations/revert', $data);
 					die();
@@ -167,6 +153,14 @@
 				}
 				if (empty($data['date_err']))
 				{
+					// delete the reservation if the delete button was clicked
+					if ($_POST['action']=='Delete') 
+					{
+						$this->reservationModel->deleteReservation($reservation_id_hidden);
+						flash('register_success', 'Done deleting the reservation', 'alert alert-warning');
+						redirect('reservations/changeReservation');
+						die();
+					}
 					if($this->reservationModel->updateReservations($data))
 					{
 						flash('register_success', 'Done changing the reservations');
@@ -241,7 +235,7 @@
 			{
 				$_POST= filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-				$row= $this->reservationModel->fetchDetailsByReservationId($id)[0]; 
+				$row= $this->reservationModel->fetchDetailsByReservationId($id)[0];
 				$data['email'] = $_POST['email'];
 				$data['password']= $_POST['password'];
 				$data['email_err']='';
@@ -263,14 +257,14 @@
 	            		if($clientdata->password== $data['password'])
 	            		{
 	            			// then check if the the balance is bigger than the required
-	            			if ($clientdata->amount > $data['amount']) 
+	            			if ($clientdata->amount > $data['amount'])
 	            			{
 	            				$this->paymentModel->reduceClientCash($data);
 	            				$this->reservationModel->confirmReservation($data);
 
 	            				flash('register_success', "Your reservation has been confirmed you will have to use the reservation code: ". $data['reservationId']. " When needed");
 	            				die("done registering go to show all rooms or the room cart when set");
-	            				// redurect('lodges/showAll');
+	            				// redirect('lodges/showAll');
 	            			}
 	            			else
 	            			{
@@ -314,8 +308,10 @@
 				{
 					flash('register_success', "An unexpected error is happening", 'alert alert-warning');
 					echo "<script>window.history.back();</script>";
+					die();
 				}
 			}
 		}
+
 	}
 ?>

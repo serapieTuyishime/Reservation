@@ -65,6 +65,13 @@
 				return false;
 			}
 		}
+		public function changePassword($password, $telephone)
+		{
+			$this->db->query('UPDATE admins set password= :password where telephone= :telephone');
+			$this->db->bind('password', $password);
+			$this->db->bind('telephone', $telephone);
+			return $this->db->execute();
+		}
 
 	}
 ?>

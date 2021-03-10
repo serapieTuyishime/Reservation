@@ -37,13 +37,8 @@
       </div>
     </div>
   </footer><!-- End  Footer -->
-  
+
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/jquery-3.5.1.js"></script>
-
-<!-- script for validating forms onkeypress -->
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/jquery.validate.js"></script>
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/form-validation-script.js"></script>
-
 
 <!-- <script type="text/javascript" src="<?php echo URLROOT; ?>/js/new.js"></script> -->
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/main.js"></script>
@@ -58,6 +53,14 @@
   <!-- datables -->
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/dataTables.bootstrap4.js"></script>
+
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/buttons.flash.min.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/jszip.min.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/pdfmake.min.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/vfs_fonts.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/buttons.print.min.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT; ?>/js/datatables/buttons.html5.min.js"></script>
 
   <!-- Template Main JS File -->
   <script type="text/javascript" src="<?php echo URLROOT; ?>/js/home.js"></script>

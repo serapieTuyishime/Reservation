@@ -18,6 +18,9 @@
 
   <link href="<?php echo URLROOT; ?>/css/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="<?php echo URLROOT; ?>/css/datatables/dataTables.bootstrap4.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo URLROOT; ?>/css/datatables/buttons.dataTables.min.css">
+
   <!-- Template Main CSS File -->
   <link href="<?php echo URLROOT; ?>/css/home.css" rel="stylesheet">
 
@@ -36,85 +39,52 @@
     </div>
     <span class="close-box-collapse right-boxed ion-ios-close"></span>
     <div class="box-collapse-wrap form">
-      <form class="form-a">
+      <form class="form-a" action="<?php echo URLROOT; ?>/lodges/search" method="post">
         <div class="row">
           <div class="col-md-12 mb-2">
             <div class="form-group">
-              <label for="Type">Keyword</label>
-              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
+              <label for="Type">Country</label>
+              <input type="text" class="form-control form-control-lg form-control-a" value="rwanda" readonly name="country">
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="Type">Type</label>
-              <select class="form-control form-control-lg form-control-a" id="Type">
-                <option>All Type</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
+              <label for="Province">Province</label>
+              <select class="form-control form-control-lg form-control-a" id="Province" name="province">
+                <option value="">-SELECT</option>
+                <option value="north">North</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="city">City</label>
-              <select class="form-control form-control-lg form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
+              <label for="district">District</label>
+              <select class="form-control form-control-lg form-control-a" id="district" name="district">
+                <option value="">-Select</option>
+                <option value="musanze">Musanze</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bedrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
+              <label for="sector">Sector</label>
+              <select class="form-control form-control-lg form-control-a" id="sector" name="sector">
+                <option value="">Select</option>
+                <option value="muhoza">Muhoza</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bathrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="price">Min Price</label>
-              <select class="form-control form-control-lg form-control-a" id="price">
-                <option>Unlimite</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$150,000</option>
-                <option>$200,000</option>
+              <label for="cell">cell</label>
+              <select class="form-control form-control-lg form-control-a" id="cell" name="cell">
+                <option value="">--select</option>
+                <option value="ruhengeri">Ruhengeri</option>
               </select>
             </div>
           </div>
           <div class="col-md-12">
-            <button type="submit" class="btn btn-b">Search Property</button>
+            <button type="submit" class="btn btn-b">Search Lodge</button>
           </div>
         </div>
       </form>
@@ -162,7 +132,7 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/contact">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/managers/login">Manager login</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/Managerlogin">Manager login</a>
           </li>
         </ul>
       </div>

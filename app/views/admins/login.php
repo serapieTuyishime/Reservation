@@ -3,9 +3,9 @@
     <div class="col-md-6 mx-auto">
         <div class="card card-body bg-light mt-5">
             <?php flash('register_success'); ?>
-            <h2>Admin login </h2> <span class="text-muted" id="small_words">Or as a <a href="<?php echo URLROOT; ?>/managers/login">manager</a></span>
+            <h2>Admin login </h2> <span class="text-muted" id="small_words">Or as a <a href="<?php echo URLROOT; ?>/users/managerLogin">manager</a></span>
             <p>Please fill in your credentials to log in</p>
-            <form action="<?php echo URLROOT; ?>/admins/login" method="post">
+            <form action="<?php echo URLROOT; ?>/users/adminLogin" method="post">
                 <div class="form-group">
                     <label for="username">Username: <sup>*</sup></label>
                     <input type="username" name="username" maxlength="50" onkeypress="return validate_alphabets(event)" class="form-control form-control-lg <?php echo (empty($data['username_err'])) ? '':'is-invalid'; ?>"
@@ -24,7 +24,7 @@
                         <input type="submit" value="Login" class="btn btn-success btn-block">
                     </div>
                     <div class="col">
-                        <a href="<?php echo URLROOT; ?>/managers/register" class="btn btn-light btn-block">No account? Register</a>
+                        <a href="<?php echo URLROOT; ?>/users/adminforgotPassword" class="btn btn-light btn-block">Forgot password? </a>
                     </div>
                 </div>
             </form>
